@@ -1,15 +1,15 @@
 #!/bin/bash
-#´¦ÀíË¼Â·
-#Ñ­»·´ÓÊı¾İ¿â¶ÁÈ¡resouce_id »¹ÓĞpaper_logo,»¹ÓĞpage_pic
-#Í¨¹ıwget½«Í¼Æ¬ÏÂÔØ±£´æµ½ÖÆ¶¨µÄÄ¿Â¼
-#¸üĞÂÊı¾İ¿âÖĞµÄÍ¼Æ¬µØÖ·
+#å¤„ç†æ€è·¯
+#å¾ªç¯ä»æ•°æ®åº“è¯»å–resouce_id è¿˜æœ‰paper_logo,è¿˜æœ‰page_pic
+#é€šè¿‡wgetå°†å›¾ç‰‡ä¸‹è½½ä¿å­˜åˆ°åˆ¶å®šçš„ç›®å½•
+#æ›´æ–°æ•°æ®åº“ä¸­çš„å›¾ç‰‡åœ°å€
 
 HOSTNAME="192.168.1.253"
 PORT="3306"
 USERNAME="..."
 PASSWORD="..."
 DBNAME="..."
-#Í¼Æ¬´æ·ÅÂ·¾¶
+#å›¾ç‰‡å­˜æ”¾è·¯å¾„
 IMG="/home/lzz/res/star/star_img/"
 
 sql="select id,star_img from zmt_media WHERE plate<>2"
@@ -19,13 +19,13 @@ do
         if [ "$img"x != 'x' ];then
             file_type=${img:0-4}
             img_file=$IMG$id$file_type
-            #ÏÂÔØÍ¼Æ¬¿ÉÒÔÖØÊÔÁ½´Î³¬Ê±ÊÇ10Ãë
+            #ä¸‹è½½å›¾ç‰‡å¯ä»¥é‡è¯•ä¸¤æ¬¡è¶…æ—¶æ˜¯10ç§’
             `/usr/bin/wget -t 2 -T 10 -c --no-check-certificate "http://www.myunmei.com"$img -O $img_file`
-	    #ÅĞ¶ÏÎÄ¼şµÄ´óĞ¡£¬Èç¹ûµÈÓÚ0ÒªÖØĞÂ×¥Ò»´Î
+	    #åˆ¤æ–­æ–‡ä»¶çš„å¤§å°ï¼Œå¦‚æœç­‰äº0è¦é‡æ–°æŠ“ä¸€æ¬¡
             if [ $(/usr/bin/stat -c %s $img_file) -eq 0 ];then
             `/usr/bin/wget -t 2 -T 10 -c --no-check-certificate "http://www.myunmei.com"$img -O $img_file`
             fi
-	    #¸üĞÂÊı¾İ¿â 	
+	    #æ›´æ–°æ•°æ®åº“ 	
             sql="update zmt_media set star_img='"http://.../res/star/star_img/"$id$file_type' where id=$id"
             /phpstudy/mysql/bin/mysql -h${HOSTNAME}  -P${PORT}  -u${USERNAME} -p${PASSWORD} ${DBNAME} -e "${sql}"
         fi
