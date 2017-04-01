@@ -9,6 +9,10 @@
 
  为了减少网络开销让用户获得更好的体验，我们网站上的图片要做相应的压缩来较小图片打大小
 
+### remotes 分布式配置
+  只要修改一台机器就可以同步到所有到机器上
+  用法： vs hello.txt 自动同步到远程机器  touch hello.txt;remote
+  注：要吧 vs remote  两个命令加入到 path  PATH=/命令所在路径/:$PATH
 ### splid_log.sh | 日志分割工具
 * 使用场景
 

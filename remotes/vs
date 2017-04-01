@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ ! "$1" ]; then
+	echo "error no file edit!"
+else
+	base_dir=`pwd`
+	file_path="${base_dir}/${1}"
+	vim $1
+	remote $1
+fi

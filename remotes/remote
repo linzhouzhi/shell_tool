@@ -1,0 +1,21 @@
+#!/bin/bash
+USERNAME="lzz"
+default_path=`pwd`
+default_path="/home/lzz/work/test/"
+ip_list="192.168.1.107 192.168.1.107 192.168.1.107"
+echo "you will rsync ${default_path}? yes or no"
+read answer
+if [ $answer != "yes" ];then
+	exit 1
+fi
+if [ ! "$1" ]; then
+	for ip in $ip_list
+	do
+		rsync -rR * ${USERNAME}@${ip}:${default_path}
+	done
+else
+	for ip in $ip_list
+	do
+		rsync -rR ${1} ${USERNAME}@${ip}:${default_path}
+	done
+fi
